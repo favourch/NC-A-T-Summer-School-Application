@@ -1,0 +1,1562 @@
+<!--Created by Dominique Mattis, Jajuan Monroe and Mark Bentley-->
+<!--This application is an admission application for non-degree seeking students for North Carolina A&T-->
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Admission Application for Visiting/Non-Degree Seeking Students</title>
+      <script type="text/javascript" src="calendar.js"></script>
+      <!--    recaptcha library-->
+      <script src='https://www.google.com/recaptcha/api.js'></script>
+      <!-- Bootstrap library-->
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><!-- Jquery library-->
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="modified_view.css" media="all">
+      <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+      <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+      <script>
+         //anonymous jquery function
+         $(function() {
+         
+         // Setup form validation
+         $("#AdmissionsFormA").validate({
+         
+         // Specify the validation rules
+         rules: {
+             todaysDate_1: "required",
+             todaysDate_2: "required",
+             todaysDate_3: "required",
+             nameFirst: "required",
+             nameLast: "required",
+             ssn: "required",
+             streetAddress: "required",
+             city: "required",
+             state: "required",
+             zipCode: "required",
+			 phone1: "required",
+			 phone2: "required",
+			 phone3: "required",
+             birthDate_1: "required",
+             birthDate_2: "required",
+             birthDate_3: "required",
+             residence: "required",
+             sign2: "required",
+             lastFourSSN2: "required",
+             crime1: "required",
+             crime2: "required",
+             crime3: "required",
+             crime4: "required",
+             suspend: "required",
+             military: "required",
+             ecNameFirst: "required",
+             ecNameLast: "required",
+             ecrelation: "required",
+             ecStreetAddress: "required",
+             ecCity: "required",
+             ecState: "required",
+             ecPostal: "required",
+             ecphone1: "required",
+             ecphone2: "required",
+             ecphone3: "required",
+             
+             "session[]": {
+             required: true,
+             minlength: 1
+         },
+             "applied[]": {
+             required: true,
+             minlength: 1
+         },
+             "admitted[]": {
+             required: true,
+             minlength: 1
+         },
+             "enrolled[]": {
+             required: true,
+             minlength: 1
+         },
+             "currentIns[]": {
+             required: true,
+             minlength: 1
+         },
+              "admit[]": {
+             required: true,
+             minlength: 1
+         },
+              "citizen[]": {
+             required: true,
+             minlength: 1
+         },
+             email: {
+         required: true,
+                 email: true
+             },
+            "education[]": {
+             required: true,
+             minlength: 1
+         },
+         },
+         
+         
+         // Specify the validation error messages
+         messages: {
+             todaysDate_1: "Month Missing",
+             todaysDate_2: "Day Missing",
+             todaysDate_1: "Year Missing",
+             nameFirst: "First Name Missing",
+             nameLast: "Last Name Missing",
+             ssn: "SSN Missing",
+             streetAddress: "Street Address Missing",
+           city: "City Missing",
+             state: "State Missing",
+             zipCode: "Zip Code Missing",
+			 phone1, phone2, phone3: "Phone Number Missing",
+             ecNameFirst: "Emergency Contact First Name Missing",
+             ecNameLast: "Emergency Contact Last Name Missing",
+             ecrelation: "Emergency Contact Relation Missing",
+             ecStreetAddress: "Emergency Contact Street Address Missing",
+             ecCity: "Emergency Contact City Missing",
+             ecState: "Emergency Contact State Missing",
+             ecPostal: "Emergency Contact Postal Code Missing",
+             ecphone1: "Emergency Contact Area Code Missing",
+             ecphone2: "Emergency Contact Phone Missing",
+             ecphone3: "Emergency Contact Phone Missing",
+             birthDate_1: "Birth Day Missing",
+             birthDate_2: "Birth Month Missing",
+             birthDate_3: "Birth Year Missing",
+             email: "Invalid Email Address",
+             residence: "Please make a selection for- Residence Information",
+             sign2: "Please Sign",
+             lastFourSSN2: "Last Four of SSN Missing",
+             crime1: "Missing selection in Campus Safety Questions",
+             crime2: "Missing selection in Campus Safety Questions",
+             crime3: "Missing selection in Campus Safety Questions",
+             crime4: "Missing selection in Campus Safety Questions",
+             suspend: "Missing selection in Campus Safety Questions",
+             military: "Missing selection in Campus Safety Questions",
+             
+            'session[]': {
+                 required: "Select Session",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'admit[]': {
+                 required: "Select Admission Status",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'citizen[]': {
+                 required: "Select Citizen Status",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'applied[]': {
+                 required: "Please make a selection for- Have you ever applied to NC A&T?",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'admitted[]': {
+                 required: "Please make a selection for- Have you ever been admitted to NC A&T?",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'enrolled[]': {
+                 required: "Please make a selection for- Have you ever been enrolled in classes at NCA&T?",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'currentIns[]': {
+                 required: "Please make a selection for- Are you currently enrolled in an academic institution?",
+                 maxlength: "Check no more than {0} boxes"
+             },
+             'education[]': {
+                 required: "Please make a selection for- Education Completed",
+                 maxlength: "Check no more than {0} boxes"
+             }
+         },
+         //            
+         errorElement : 'div',
+         errorLabelContainer: '.errorTxt',
+         
+         submitHandler: function(form) {
+             form.submit();
+         }
+         });
+         });
+         
+         
+         function isNumberKey(evt){
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+           return false;
+         return true;
+         }
+         function isLetterKey(evt){
+         var charCode = (typeof evt.which == "undefined") ? evt.keyCode : evt.which;
+         var charStr = String.fromCharCode(charCode);
+         if (/\d/.test(charStr)) {
+           return false;
+         }
+         } 
+         
+      </script>
+   </head>
+   <body id="main_body">
+      <div id="form_container">
+         <form id="AdmissionsFormA" class="AdmissionsFormA" enctype="multipart/form-data" method="post" action="mail.php" novalidate="novalidate">
+            <div class="form_description">
+               <table cellpadding="10" cellspacing="10">
+                  <tr>
+                     <td><img src="NCATLogo.jpg" style="width:130px;height:130px; padding: 15px 15px 15px" align="left"></td>
+                     <td>
+                        <h2>North Carolina Agricultural and Technical State University</h2>
+                        <p> Admission Application for Visiting/Non-Degree Seeking Students</p>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <ul>
+            <table class="formTable">
+               <tr>
+                  <th><b>Address: </b></th>
+                  <th>North Carolina A&T State University
+                     </br>
+                     Office of Summer Sessions 
+                     </br>
+                     1020 E Wendover, Suite 109
+                     </br>
+                     Greensboro, North Carolina  27405
+                  </th>
+               </tr>
+               <tr>
+                  <th><b>Phone: </b></th>
+                  <th>(336) 334-7810</th>
+                  <th><b>Fax:</b></th>
+                  <th>(336) 334-7081</th>
+               </tr>
+            </table>
+            <div style="padding: 15px 15px 15px">
+               Application will <u><b>NOT</b></u> be processed without $45 application fee.
+               </br>
+               Non-refundable fee may be paid by web, personal check, money order, or cashier's check payable to: North Carolina A&T State University
+               </br>
+               </br>
+               This form is <u><b>NOT</b></u> an application for admission to the University and <u><b>IS NOT</b></u> intended for use by continuing NC A&T degree students/candidates already admitted to A&T or Post Baccalaureate Studies (PBS). Please contact the Undergraduate Admissions Office and the School of Graduate Studies.
+            </div>
+            </br>	
+            <label style="padding-left: 10px" class="description"><span style="font-size: 14px">(<span style="color: red;">*</span>) Denotes an area with required field(s)!</span></label>
+            <div style="padding-left: 15px" class ="errorTxt"></div>
+            <li id="todayDate" >
+               <label class="description" for="todaysDate"><span style="color: red; font-size: 14px" >*</span>Date</label>
+               <span>
+               <input id="todaysDate_1" name="todaysDate_1" class="element text" size="2" maxlength="2" value="" onkeypress="return isNumberKey(event)"> /
+               <label for="todaysDate_1">MM</label>
+               </span>
+               <span>
+               <input id="todaysDate_2" name="todaysDate_2" class="element text" size="2" maxlength="2" value="" onkeypress="return isNumberKey(event)"> /
+               <label for="todaysDate_2">DD</label>
+               </span>
+               <span>
+               <input id="todaysDate_3" name="todaysDate_3" class="element text" size="4" maxlength="4" value="" onkeypress="return isNumberKey(event)">
+               <label for="todaysDate_3">YYYY</label>
+               </span>
+               <span id="calendar_1">
+               <img id="cal_img_1" class="datepicker" src="calendar.gif" alt="Pick a date.">	
+               </span>
+               <!--                        Date picker-->
+               <script type="text/javascript">
+                  Calendar.setup({
+                  inputField	 : "todaysDate_3",
+                  baseField    : "todaysDate",
+                  displayArea  : "calendar_1",
+                  button		 : "cal_img_1",
+                  ifFormat	 : "%B %e, %Y",
+                  onSelect	 : selectDate
+                  });
+               </script>
+            </li>
+            </br>
+            <li id="Sessions">
+               <label class="description" for="Sessions"><span style="color: red; font-size: 14px" >*</span>Session(s): </br> Check all that apply:</label>
+               <span>
+                  <table class="formTable">
+                     <tr>
+                        <td><input id="DualSession" name="session[]" class="element checkbox" type="checkbox" value="Dual Session"/>
+                           <label class="choice" for="DualSession">Dual Session</label>
+                        </td>
+                        <td><input id="PreSession" name="session[]" class="element checkbox" type="checkbox" value="Pre Session" />
+                           <label class="choice" for="PreSession">Pre-Session</label>
+                        </td>
+                        <td><input id="1stSession" name="session[]" class="element checkbox" type="checkbox" value="1st Session" />
+                           <label class="choice" for="1stSession">1st Session</label>
+                        </td>
+                        <td><input id="2ndSession" name="session[]" class="element checkbox" type="checkbox" value="2nd Session" />
+                           <label class="choice" for="2ndSession">2nd Session</label>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td><input id="Intersession" name="session[]" class="element checkbox" type="checkbox" value="Intersession" />
+                           <label class="choice" for="Intersession">Intersession</label>
+                        </td>
+                        <td><input id="Fall" name="session[]" class="element checkbox" type="checkbox" value="Fall" />
+                           <label class="choice" for="Fall">Fall</label>
+                        </td>
+                        <td><input id="Spring" name="session[]" class="element checkbox" type="checkbox" value="Spring"/>
+                           <label class="choice" for="Spring">Spring</label>
+                        </td>
+                        <td></td>
+                     </tr>
+                  </table>
+               </span>
+            </li>
+            </br>
+            <li id="AdmissionStatus">
+               <label class="description" for="AdmissionStatus"><span style="color: red; font-size: 14px" >*</span>Admission Status:</label>
+               <span>
+                  <table class="formTable">
+                     <tr>
+                        <td><input id="admit[]" name="admit[]" class="element checkbox" type="radio" value="Visiting Undergraduate"/>
+                           <label class="choice" for="VisitingUndergraduate">Visiting Undergraduate</label>
+                        </td>
+                        <td><input id="DistanceLearning" name="admit[]" class="element checkbox" type="radio" value="Distance Learning" />
+                           <label class="choice" for="DistanceLearning">Distance Learning</label>
+                        </td>
+                        <td><input id="HighSchoolStudent" name="admit[]" class="element checkbox" type="radio" value="High School Student" />
+                           <label class="choice" for="HighSchoolStudent">High School Student</label>
+                        </td>
+                        <td><input id="IncomingFreshman" name="admit[]" class="element checkbox" type="radio" value="Incoming Freshman" />
+                           <label class="choice" for="IncomingFreshman">In-coming Freshman</label>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td><input id="NonDegreeSeeking" name="admit[]" class="element checkbox" type="radio" value="Non Degree Seeking" />
+                           <label class="choice" for="NonDegreeSeeking">Non-Degree Seeking</label>
+                        </td>
+                        <td><input id="StudentAthlete" name="admit[]" class="element checkbox" type="radio" value="Student Athlete" />
+                           <label class="choice" for="StudentAthlete">Student Athlete</label>
+                        </td>
+                        <td><input id="Other" name="admit[]" class="element checkbox" type="radio" value="Other: " />
+                           <label class="choice" for="Other">Other</label> 
+                        </td>
+                        <td>Specify <input id="Specify" name= "admit[]" class="element text" maxlength="50" size="20" value=""  onkeypress="return isLetterKey(event)"/>
+               </span>
+               </td>
+               </tr>
+               </table>
+            </li>
+            </br>
+            <li id="Name">
+               <label class="description" for="name"><span style="color: red; font-size: 14px" >*</span>Name </label>
+               <span>
+               <input id="nameFirst" name= "nameFirst" class="element text" maxlength="50" size="20" value=""  onkeypress="return isLetterKey(event)" />
+               <label>First</label>
+               </span>
+               <span>
+               <input id="NameMiddle" name= "nameMiddle" class="element text" maxlength="1" size="5" value="" onkeypress="return isLetterKey(event)"/>
+               <label>MI</label>
+               </span>
+               <span>
+               <input id="NameLast" name= "nameLast" class="element text" maxlength="50" size="20" value="" onkeypress="return isLetterKey(event)"/>
+               <label>Last</label>
+               </span>
+               <span>
+               <input id="OtherName" name= "otherName" class="element text" maxlength="50" size="20" value="" onkeypress="return isLetterKey(event)"/>
+               <label>Other</label>
+               </span>
+            </li>
+            <li id="SocialSecurityNumber">
+               <label class="description" for="SocialSecurityNumber"><span style="color: red; font-size: 14px" >*</span>Social Security Number </label>
+               <span>
+               <input type= "password" id="ssn" name= "ssn" class="element text" maxlength="9" size="20" value="" onkeypress="return isNumberKey(event)"/>
+               </span>
+            </li>
+            <li id="CurrentMailingAddress">
+               <label class="description" for="CurrentMailingAddress"><span style="color: red; font-size: 14px" >*</span>Current Mailing Address </label>
+               <div>
+                  <input id="StreetAddress" name="streetAddress" class="element text large" value="" type="text"/>
+                  <label for="StreetAddress">Street Address</label>
+               </div>
+               <div>
+                  <input id="AddressLine2" name="addressLine2" class="element text large" value="" type="text">
+                  <label for="AddressLine2">Address Line 2</label>
+               </div>
+               <div class="left">
+                  <input id="City" name="city" class="element text medium" value=""  onkeypress="return isLetterKey(event)" >
+                  <label for="City">City</label>
+               </div>
+               <div class="right">
+                  <input id="State" name="state" class="element text medium" value=""  onkeypress="return isLetterKey(event)" >
+                  <label for="State">State / Province / Region</label>
+               </div>
+               <div class="left">
+                  <input id="ZipCode" name="zipCode" class="element text medium" maxlength="5" value="" type="text" onkeypress="return isNumberKey(event)">
+                  <label for="ZipCode">Postal / Zip Code</label>
+               </div>
+               <div class="right">
+                  <select class="element select medium" id="Country" name="country" >
+                     <option value="" selected="selected"></option>
+                     <option value="Afghanistan">Afghanistan</option>
+                     <option value="Albania">Albania</option>
+                     <option value="Algeria">Algeria</option>
+                     <option value="Andorra">Andorra</option>
+                     <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                     <option value="Argentina">Argentina</option>
+                     <option value="Armenia">Armenia</option>
+                     <option value="Australia">Australia</option>
+                     <option value="Austria">Austria</option>
+                     <option value="Azerbaijan">Azerbaijan</option>
+                     <option value="Bahamas">Bahamas</option>
+                     <option value="Bahrain">Bahrain</option>
+                     <option value="Bangladesh">Bangladesh</option>
+                     <option value="Barbados">Barbados</option>
+                     <option value="Belarus">Belarus</option>
+                     <option value="Belgium">Belgium</option>
+                     <option value="Belize">Belize</option>
+                     <option value="Benin">Benin</option>
+                     <option value="Bhutan">Bhutan</option>
+                     <option value="Bolivia">Bolivia</option>
+                     <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                     <option value="Botswana">Botswana</option>
+                     <option value="Brazil">Brazil</option>
+                     <option value="Brunei">Brunei</option>
+                     <option value="Bulgaria">Bulgaria</option>
+                     <option value="Burkina Faso">Burkina Faso</option>
+                     <option value="Burundi">Burundi</option>
+                     <option value="Cambodia">Cambodia</option>
+                     <option value="Cameroon">Cameroon</option>
+                     <option value="Canada">Canada</option>
+                     <option value="Cape Verde">Cape Verde</option>
+                     <option value="Central African Republic">Central African Republic</option>
+                     <option value="Chad">Chad</option>
+                     <option value="Chile">Chile</option>
+                     <option value="China">China</option>
+                     <option value="Colombia">Colombia</option>
+                     <option value="Comoros">Comoros</option>
+                     <option value="Congo">Congo</option>
+                     <option value="Cook Islands and Niue">Cook Islands and Niue</option>
+                     <option value="Costa Rica">Costa Rica</option>
+                     <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                     <option value="Croatia">Croatia</option>
+                     <option value="Cuba">Cuba</option>
+                     <option value="Cyprus">Cyprus</option>
+                     <option value="Czech Republic">Czech Republic</option>
+                     <option value="Denmark">Denmark</option>
+                     <option value="Djibouti">Djibouti</option>
+                     <option value="Dominica">Dominica</option>
+                     <option value="Dominican Republic">Dominican Republic</option>
+                     <option value="East Timor">East Timor</option>
+                     <option value="Ecuador">Ecuador</option>
+                     <option value="Egypt">Egypt</option>
+                     <option value="El Salvador">El Salvador</option>
+                     <option value="Equatorial Guinea">Equatorial Guinea</option>
+                     <option value="Eritrea">Eritrea</option>
+                     <option value="Estonia">Estonia</option>
+                     <option value="Ethiopia">Ethiopia</option>
+                     <option value="Fiji">Fiji</option>
+                     <option value="Finland">Finland</option>
+                     <option value="France">France</option>
+                     <option value="Gabon">Gabon</option>
+                     <option value="Gambia">Gambia</option>
+                     <option value="Georgia">Georgia</option>
+                     <option value="Germany">Germany</option>
+                     <option value="Ghana">Ghana</option>
+                     <option value="Greece">Greece</option>
+                     <option value="Grenada">Grenada</option>
+                     <option value="Guatemala">Guatemala</option>
+                     <option value="Guinea">Guinea</option>
+                     <option value="Guinea-Bissau">Guinea-Bissau</option>
+                     <option value="Guyana">Guyana</option>
+                     <option value="Haiti">Haiti</option>
+                     <option value="Honduras">Honduras</option>
+                     <option value="Hong Kong">Hong Kong</option>
+                     <option value="Hungary">Hungary</option>
+                     <option value="Iceland">Iceland</option>
+                     <option value="India">India</option>
+                     <option value="Indonesia">Indonesia</option>
+                     <option value="Iran">Iran</option>
+                     <option value="Iraq">Iraq</option>
+                     <option value="Ireland">Ireland</option>
+                     <option value="Israel">Israel</option>
+                     <option value="Italy">Italy</option>
+                     <option value="Jamaica">Jamaica</option>
+                     <option value="Japan">Japan</option>
+                     <option value="Jordan">Jordan</option>
+                     <option value="Kazakhstan">Kazakhstan</option>
+                     <option value="Kenya">Kenya</option>
+                     <option value="Kiribati">Kiribati</option>
+                     <option value="North Korea">North Korea</option>
+                     <option value="South Korea">South Korea</option>
+                     <option value="Kuwait">Kuwait</option>
+                     <option value="Kyrgyzstan">Kyrgyzstan</option>
+                     <option value="Laos">Laos</option>
+                     <option value="Latvia">Latvia</option>
+                     <option value="Lebanon">Lebanon</option>
+                     <option value="Lesotho">Lesotho</option>
+                     <option value="Liberia">Liberia</option>
+                     <option value="Libya">Libya</option>
+                     <option value="Liechtenstein">Liechtenstein</option>
+                     <option value="Lithuania">Lithuania</option>
+                     <option value="Luxembourg">Luxembourg</option>
+                     <option value="Macedonia">Macedonia</option>
+                     <option value="Madagascar">Madagascar</option>
+                     <option value="Malawi">Malawi</option>
+                     <option value="Malaysia">Malaysia</option>
+                     <option value="Maldives">Maldives</option>
+                     <option value="Mali">Mali</option>
+                     <option value="Malta">Malta</option>
+                     <option value="Marshall Islands">Marshall Islands</option>
+                     <option value="Mauritania">Mauritania</option>
+                     <option value="Mauritius">Mauritius</option>
+                     <option value="Mexico">Mexico</option>
+                     <option value="Micronesia">Micronesia</option>
+                     <option value="Moldova">Moldova</option>
+                     <option value="Monaco">Monaco</option>
+                     <option value="Mongolia">Mongolia</option>
+                     <option value="Montenegro">Montenegro</option>
+                     <option value="Morocco">Morocco</option>
+                     <option value="Mozambique">Mozambique</option>
+                     <option value="Myanmar">Myanmar</option>
+                     <option value="Namibia">Namibia</option>
+                     <option value="Nauru">Nauru</option>
+                     <option value="Nepal">Nepal</option>
+                     <option value="Netherlands">Netherlands</option>
+                     <option value="New Zealand">New Zealand</option>
+                     <option value="Nicaragua">Nicaragua</option>
+                     <option value="Niger">Niger</option>
+                     <option value="Nigeria">Nigeria</option>
+                     <option value="Norway">Norway</option>
+                     <option value="Oman">Oman</option>
+                     <option value="Pakistan">Pakistan</option>
+                     <option value="Palau">Palau</option>
+                     <option value="Panama">Panama</option>
+                     <option value="Papua New Guinea">Papua New Guinea</option>
+                     <option value="Paraguay">Paraguay</option>
+                     <option value="Peru">Peru</option>
+                     <option value="Philippines">Philippines</option>
+                     <option value="Poland">Poland</option>
+                     <option value="Portugal">Portugal</option>
+                     <option value="Puerto Rico">Puerto Rico</option>
+                     <option value="Qatar">Qatar</option>
+                     <option value="Romania">Romania</option>
+                     <option value="Russia">Russia</option>
+                     <option value="Rwanda">Rwanda</option>
+                     <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                     <option value="Saint Lucia">Saint Lucia</option>
+                     <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                     <option value="Samoa">Samoa</option>
+                     <option value="San Marino">San Marino</option>
+                     <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                     <option value="Saudi Arabia">Saudi Arabia</option>
+                     <option value="Senegal">Senegal</option>
+                     <option value="Serbia and Montenegro">Serbia and Montenegro</option>
+                     <option value="Seychelles">Seychelles</option>
+                     <option value="Sierra Leone">Sierra Leone</option>
+                     <option value="Singapore">Singapore</option>
+                     <option value="Slovakia">Slovakia</option>
+                     <option value="Slovenia">Slovenia</option>
+                     <option value="Solomon Islands">Solomon Islands</option>
+                     <option value="Somalia">Somalia</option>
+                     <option value="South Africa">South Africa</option>
+                     <option value="Spain">Spain</option>
+                     <option value="Sri Lanka">Sri Lanka</option>
+                     <option value="Sudan">Sudan</option>
+                     <option value="Suriname">Suriname</option>
+                     <option value="Swaziland">Swaziland</option>
+                     <option value="Sweden">Sweden</option>
+                     <option value="Switzerland">Switzerland</option>
+                     <option value="Syria">Syria</option>
+                     <option value="Taiwan">Taiwan</option>
+                     <option value="Tajikistan">Tajikistan</option>
+                     <option value="Tanzania">Tanzania</option>
+                     <option value="Thailand">Thailand</option>
+                     <option value="Togo">Togo</option>
+                     <option value="Tonga">Tonga</option>
+                     <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                     <option value="Tunisia">Tunisia</option>
+                     <option value="Turkey">Turkey</option>
+                     <option value="Turkmenistan">Turkmenistan</option>
+                     <option value="Tuvalu">Tuvalu</option>
+                     <option value="Uganda">Uganda</option>
+                     <option value="Ukraine">Ukraine</option>
+                     <option value="United Arab Emirates">United Arab Emirates</option>
+                     <option value="United Kingdom">United Kingdom</option>
+                     <option value="United States">United States</option>
+                     <option value="Uruguay">Uruguay</option>
+                     <option value="Uzbekistan">Uzbekistan</option>
+                     <option value="Vanuatu">Vanuatu</option>
+                     <option value="Vatican City">Vatican City</option>
+                     <option value="Venezuela">Venezuela</option>
+                     <option value="Vietnam">Vietnam</option>
+                     <option value="Yemen">Yemen</option>
+                     <option value="Zambia">Zambia</option>
+                     <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+                  <label for="Country">Country</label>
+               </div>
+            </li>
+            <li id="UserNumber">
+               <label class="description" for="PhoneDaytime"><span style="color: red; font-size: 14px" >*</span>Phone(Daytime) </label>
+               <span>
+               <input id="phone1" name="phone1" class="element text" size="3" maxlength="3" value=""  onkeypress="return isNumberKey(event)" > -
+               <label for="phone1">###</label>
+               </span>
+               <span>
+               <input id="phone2" name="phone2" class="element text" size="3" maxlength="3" value=""  onkeypress="return isNumberKey(event)" > -
+               <label for="phone2">###</label>
+               </span>
+               <span>
+               <input id="phone3" name="phone3" class="element text" size="4" maxlength="4" value=""  onkeypress="return isNumberKey(event)" >
+               <label for="phone3">####</label>
+               </span>
+            </li>
+            <li id="li_1">
+               <label class="description" for="PhoneEvening"><span style="color: red; font-size: 14px" >*</span>Phone(Evening) </label>
+               <span>
+               <input id="otherPhone1" name="otherPhone1" class="element text" size="3" maxlength="3" value=""  onkeypress="return isNumberKey(event)"> -
+               <label for="otherPhone1">###</label>
+               </span>
+               <span>
+               <input id="otherPhone2" name="otherPhone2" class="element text" size="3" maxlength="3" value=""  onkeypress="return isNumberKey(event)" > -
+               <label for="otherPhone2">###</label>
+               </span>
+               <span>
+               <input id="otherPhone3" name="otherPhone3" class="element text" size="4" maxlength="4" value=""  onkeypress="return isNumberKey(event)" >
+               <label for="otherPhone3">####</label>
+               </span>
+            </li>
+            <li id="Email">
+               <label class="description" for="Email"><span style="color: red; font-size: 14px" >*</span>Email (Please enter a valid email to receive confirmation) </label>
+               <div>
+                  <input id="Email" name="email" class="element text medium" type="email" maxlength="255" value="" />
+               </div>
+            </li>
+            </br>
+            <li id="EmergencyContactName">
+               <label class="description" for="EmergencyContactName"><span style="color: red; font-size: 14px" >*</span>Emergency Contact Name </label>
+               <span>
+               <input id="EC_NameFirst" name= "ecNameFirst" class="element text" maxlength="50" size="20" value=""  onkeypress="return isLetterKey(event)"/>
+               <label>First</label>
+               </span>
+               <span>
+               <input id="EC_NameMiddle" name= "ecNameMiddle" class="element text" maxlength="1" size="5" value="" onkeypress="return isLetterKey(event)"/>
+               <label>MI</label>
+               </span>
+               <span>
+               <input id="EC_NameLast" name= "ecNameLast" class="element text" maxlength="50" size="20" value=""  onkeypress="return isLetterKey(event)"/>
+               <label>Last</label>
+               </span>
+               <span>
+               <input id="EC_OtherName" name= "ecOtherName" class="element text" maxlength="50" size="20" value="" onkeypress="return isLetterKey(event)"/>
+               <label>Other</label>
+               </span>
+            </li>
+            <li id="EmergencyContactRelationship">
+               <label class="description" for="EC_relation"><span style="color: red; font-size: 14px" >*</span>Emergency Contact Relationship </label>
+               <div>
+                  <input id="EC_relation" name="ecrelation" class="element text medium" type="text" maxlength="255" value=""  onkeypress="return isLetterKey(event)"/>
+               </div>
+            </li>
+            <li id="EmergencyContactMailingAddress">
+               <label class="description" for="EC_MailingAddress"><span style="color: red; font-size: 14px" >*</span>Emergency Contact Mailing Address </label>
+               <div>
+                  <input id="EC_StreetAddress" name="ecStreetAddress" class="element text large" value="" type="text">
+                  <label for="EC_StreetAddress">Street Address</label>
+               </div>
+               <div>
+                  <input id="EC_AddressLine2" name="ecAddressLine2" class="element text large" value="" type="text">
+                  <label for="EC_AddressLine2">Address Line 2</label>
+               </div>
+               <div class="left">
+                  <input id="EC_City" name="ecCity" class="element text medium" value=""  onkeypress="return isLetterKey(event)">
+                  <label for="EC_City">City</label>
+               </div>
+               <div class="right">
+                  <input id="EC_State" name="ecState" class="element text medium" value=""  onkeypress="return isLetterKey(event)">
+                  <label for="EC_State">State / Province / Region</label>
+               </div>
+               <div class="left">
+                  <input id="EC_Postal" name="ecPostal" class="element text medium" maxlength="5" value=""  onkeypress="return isNumberKey(event)">
+                  <label for="EC_Postal">Postal / Zip Code</label>
+               </div>
+               <div class="right">
+                  <select class="element select medium" id="EC_Country" name="ecCountry">
+                     <option value="" selected="selected"></option>
+                     <option value="Afghanistan">Afghanistan</option>
+                     <option value="Albania">Albania</option>
+                     <option value="Algeria">Algeria</option>
+                     <option value="Andorra">Andorra</option>
+                     <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                     <option value="Argentina">Argentina</option>
+                     <option value="Armenia">Armenia</option>
+                     <option value="Australia">Australia</option>
+                     <option value="Austria">Austria</option>
+                     <option value="Azerbaijan">Azerbaijan</option>
+                     <option value="Bahamas">Bahamas</option>
+                     <option value="Bahrain">Bahrain</option>
+                     <option value="Bangladesh">Bangladesh</option>
+                     <option value="Barbados">Barbados</option>
+                     <option value="Belarus">Belarus</option>
+                     <option value="Belgium">Belgium</option>
+                     <option value="Belize">Belize</option>
+                     <option value="Benin">Benin</option>
+                     <option value="Bhutan">Bhutan</option>
+                     <option value="Bolivia">Bolivia</option>
+                     <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                     <option value="Botswana">Botswana</option>
+                     <option value="Brazil">Brazil</option>
+                     <option value="Brunei">Brunei</option>
+                     <option value="Bulgaria">Bulgaria</option>
+                     <option value="Burkina Faso">Burkina Faso</option>
+                     <option value="Burundi">Burundi</option>
+                     <option value="Cambodia">Cambodia</option>
+                     <option value="Cameroon">Cameroon</option>
+                     <option value="Canada">Canada</option>
+                     <option value="Cape Verde">Cape Verde</option>
+                     <option value="Central African Republic">Central African Republic</option>
+                     <option value="Chad">Chad</option>
+                     <option value="Chile">Chile</option>
+                     <option value="China">China</option>
+                     <option value="Colombia">Colombia</option>
+                     <option value="Comoros">Comoros</option>
+                     <option value="Congo">Congo</option>
+                     <option value="Cook Islands and Niue">Cook Islands and Niue</option>
+                     <option value="Costa Rica">Costa Rica</option>
+                     <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                     <option value="Croatia">Croatia</option>
+                     <option value="Cuba">Cuba</option>
+                     <option value="Cyprus">Cyprus</option>
+                     <option value="Czech Republic">Czech Republic</option>
+                     <option value="Denmark">Denmark</option>
+                     <option value="Djibouti">Djibouti</option>
+                     <option value="Dominica">Dominica</option>
+                     <option value="Dominican Republic">Dominican Republic</option>
+                     <option value="East Timor">East Timor</option>
+                     <option value="Ecuador">Ecuador</option>
+                     <option value="Egypt">Egypt</option>
+                     <option value="El Salvador">El Salvador</option>
+                     <option value="Equatorial Guinea">Equatorial Guinea</option>
+                     <option value="Eritrea">Eritrea</option>
+                     <option value="Estonia">Estonia</option>
+                     <option value="Ethiopia">Ethiopia</option>
+                     <option value="Fiji">Fiji</option>
+                     <option value="Finland">Finland</option>
+                     <option value="France">France</option>
+                     <option value="Gabon">Gabon</option>
+                     <option value="Gambia">Gambia</option>
+                     <option value="Georgia">Georgia</option>
+                     <option value="Germany">Germany</option>
+                     <option value="Ghana">Ghana</option>
+                     <option value="Greece">Greece</option>
+                     <option value="Grenada">Grenada</option>
+                     <option value="Guatemala">Guatemala</option>
+                     <option value="Guinea">Guinea</option>
+                     <option value="Guinea-Bissau">Guinea-Bissau</option>
+                     <option value="Guyana">Guyana</option>
+                     <option value="Haiti">Haiti</option>
+                     <option value="Honduras">Honduras</option>
+                     <option value="Hong Kong">Hong Kong</option>
+                     <option value="Hungary">Hungary</option>
+                     <option value="Iceland">Iceland</option>
+                     <option value="India">India</option>
+                     <option value="Indonesia">Indonesia</option>
+                     <option value="Iran">Iran</option>
+                     <option value="Iraq">Iraq</option>
+                     <option value="Ireland">Ireland</option>
+                     <option value="Israel">Israel</option>
+                     <option value="Italy">Italy</option>
+                     <option value="Jamaica">Jamaica</option>
+                     <option value="Japan">Japan</option>
+                     <option value="Jordan">Jordan</option>
+                     <option value="Kazakhstan">Kazakhstan</option>
+                     <option value="Kenya">Kenya</option>
+                     <option value="Kiribati">Kiribati</option>
+                     <option value="North Korea">North Korea</option>
+                     <option value="South Korea">South Korea</option>
+                     <option value="Kuwait">Kuwait</option>
+                     <option value="Kyrgyzstan">Kyrgyzstan</option>
+                     <option value="Laos">Laos</option>
+                     <option value="Latvia">Latvia</option>
+                     <option value="Lebanon">Lebanon</option>
+                     <option value="Lesotho">Lesotho</option>
+                     <option value="Liberia">Liberia</option>
+                     <option value="Libya">Libya</option>
+                     <option value="Liechtenstein">Liechtenstein</option>
+                     <option value="Lithuania">Lithuania</option>
+                     <option value="Luxembourg">Luxembourg</option>
+                     <option value="Macedonia">Macedonia</option>
+                     <option value="Madagascar">Madagascar</option>
+                     <option value="Malawi">Malawi</option>
+                     <option value="Malaysia">Malaysia</option>
+                     <option value="Maldives">Maldives</option>
+                     <option value="Mali">Mali</option>
+                     <option value="Malta">Malta</option>
+                     <option value="Marshall Islands">Marshall Islands</option>
+                     <option value="Mauritania">Mauritania</option>
+                     <option value="Mauritius">Mauritius</option>
+                     <option value="Mexico">Mexico</option>
+                     <option value="Micronesia">Micronesia</option>
+                     <option value="Moldova">Moldova</option>
+                     <option value="Monaco">Monaco</option>
+                     <option value="Mongolia">Mongolia</option>
+                     <option value="Montenegro">Montenegro</option>
+                     <option value="Morocco">Morocco</option>
+                     <option value="Mozambique">Mozambique</option>
+                     <option value="Myanmar">Myanmar</option>
+                     <option value="Namibia">Namibia</option>
+                     <option value="Nauru">Nauru</option>
+                     <option value="Nepal">Nepal</option>
+                     <option value="Netherlands">Netherlands</option>
+                     <option value="New Zealand">New Zealand</option>
+                     <option value="Nicaragua">Nicaragua</option>
+                     <option value="Niger">Niger</option>
+                     <option value="Nigeria">Nigeria</option>
+                     <option value="Norway">Norway</option>
+                     <option value="Oman">Oman</option>
+                     <option value="Pakistan">Pakistan</option>
+                     <option value="Palau">Palau</option>
+                     <option value="Panama">Panama</option>
+                     <option value="Papua New Guinea">Papua New Guinea</option>
+                     <option value="Paraguay">Paraguay</option>
+                     <option value="Peru">Peru</option>
+                     <option value="Philippines">Philippines</option>
+                     <option value="Poland">Poland</option>
+                     <option value="Portugal">Portugal</option>
+                     <option value="Puerto Rico">Puerto Rico</option>
+                     <option value="Qatar">Qatar</option>
+                     <option value="Romania">Romania</option>
+                     <option value="Russia">Russia</option>
+                     <option value="Rwanda">Rwanda</option>
+                     <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                     <option value="Saint Lucia">Saint Lucia</option>
+                     <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                     <option value="Samoa">Samoa</option>
+                     <option value="San Marino">San Marino</option>
+                     <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                     <option value="Saudi Arabia">Saudi Arabia</option>
+                     <option value="Senegal">Senegal</option>
+                     <option value="Serbia and Montenegro">Serbia and Montenegro</option>
+                     <option value="Seychelles">Seychelles</option>
+                     <option value="Sierra Leone">Sierra Leone</option>
+                     <option value="Singapore">Singapore</option>
+                     <option value="Slovakia">Slovakia</option>
+                     <option value="Slovenia">Slovenia</option>
+                     <option value="Solomon Islands">Solomon Islands</option>
+                     <option value="Somalia">Somalia</option>
+                     <option value="South Africa">South Africa</option>
+                     <option value="Spain">Spain</option>
+                     <option value="Sri Lanka">Sri Lanka</option>
+                     <option value="Sudan">Sudan</option>
+                     <option value="Suriname">Suriname</option>
+                     <option value="Swaziland">Swaziland</option>
+                     <option value="Sweden">Sweden</option>
+                     <option value="Switzerland">Switzerland</option>
+                     <option value="Syria">Syria</option>
+                     <option value="Taiwan">Taiwan</option>
+                     <option value="Tajikistan">Tajikistan</option>
+                     <option value="Tanzania">Tanzania</option>
+                     <option value="Thailand">Thailand</option>
+                     <option value="Togo">Togo</option>
+                     <option value="Tonga">Tonga</option>
+                     <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                     <option value="Tunisia">Tunisia</option>
+                     <option value="Turkey">Turkey</option>
+                     <option value="Turkmenistan">Turkmenistan</option>
+                     <option value="Tuvalu">Tuvalu</option>
+                     <option value="Uganda">Uganda</option>
+                     <option value="Ukraine">Ukraine</option>
+                     <option value="United Arab Emirates">United Arab Emirates</option>
+                     <option value="United Kingdom">United Kingdom</option>
+                     <option value="United States">United States</option>
+                     <option value="Uruguay">Uruguay</option>
+                     <option value="Uzbekistan">Uzbekistan</option>
+                     <option value="Vanuatu">Vanuatu</option>
+                     <option value="Vatican City">Vatican City</option>
+                     <option value="Venezuela">Venezuela</option>
+                     <option value="Vietnam">Vietnam</option>
+                     <option value="Yemen">Yemen</option>
+                     <option value="Zambia">Zambia</option>
+                     <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+                  <label for="EC_Country">Country</label>
+               </div>
+            </li>
+            <li id="EmergencyNumber">
+               <label class="description" for="EmergencyPhoneNumber"><span style="color: red; font-size: 14px" >*</span>Emergency Contact Phone</label>
+               <span>
+               <input id="EC_phone1" name="ecphone1" class="element text" size="3" maxlength="3" value=""  onkeypress="return isNumberKey(event)" > -
+               <label for="EC_phone1">###</label>
+               </span>
+               <span>
+               <input id="EC_phone2" name="ecphone2" class="element text" size="3" maxlength="3" value=""  onkeypress="return isNumberKey(event)" > -
+               <label for="EC_phone2">###</label>
+               </span>
+               <span>
+               <input id="EC_phone3" name="ecphone3" class="element text" size="4" maxlength="4" value=""  onkeypress="return isNumberKey(event)" >
+               <label for="EC_phone3">####</label>
+               </span>
+            </li>
+            </br>
+            <li id="birthDate" >
+               <label class="description" for="birthDate"><span style="color: red; font-size: 14px" >*</span>Birth Date </label>
+               <span>
+               <input id="birthDate_1" name="birthDate_1" class="element text" size="2" maxlength="2" value=""  onkeypress="return isNumberKey(event)"> /
+               <label for="birthDate_1">MM</label>
+               </span>
+               <span>
+               <input id="birthDate_2" name="birthDate_2" class="element text" size="2" maxlength="2" value=""  onkeypress="return isNumberKey(event)"> /
+               <label for="birthDate_2">DD</label>
+               </span>
+               <span>
+               <input id="birthDate_3" name="birthDate_3" class="element text" size="4" maxlength="4" value=""  onkeypress="return isNumberKey(event)">
+               <label for="birthDate_3">YYYY</label>
+               </span>
+               <span id="calendar_2">
+               <img id="cal_img_2" class="datepicker" src="calendar.gif" alt="Pick a date.">	
+               </span>
+               <script type="text/javascript">
+                  Calendar.setup({
+                  inputField	 : "birthDate_3",
+                  baseField    : "birthDate",
+                  displayArea  : "calendar_2",
+                  button		 : "cal_img_2",
+                  ifFormat	 : "%B %e, %Y",
+                  onSelect	 : selectDate
+                  });
+               </script>
+            </li>
+            <li id="PlaceOfBirth">
+               <label class="description" for="PlaceOfBirth"><font style="color: red; font-size: 14px" >* </font>Place of Birth</label>
+               <div class="left">
+                  <input id="PoB_City" name="pobCity" class="element text medium" value=""  onkeypress="return isLetterKey(event)">
+                  <label for="PoB_City">City</label>
+               </div>
+               <div class="right">
+                  <input id="PoB_State" name="pobState" class="element text medium" value=""  onkeypress="return isLetterKey(event)">
+                  <label for="PoB_State">State / Province / Region</label>
+               </div>
+               <div class="left">
+                  <input id="PoB_ZipCode" name="pobZipCode" class="element text medium" maxlength="5" value=""  onkeypress="return isNumberKey(event)">
+                  <label for="PoB_ZipCode">Postal / Zip Code</label>
+               </div>
+               <div class="right">
+                  <select class="element select medium" id="PoB_Country" name="pobCountry">
+                     <option value="" selected="selected"></option>
+                     <option value="Afghanistan">Afghanistan</option>
+                     <option value="Albania">Albania</option>
+                     <option value="Algeria">Algeria</option>
+                     <option value="Andorra">Andorra</option>
+                     <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                     <option value="Argentina">Argentina</option>
+                     <option value="Armenia">Armenia</option>
+                     <option value="Australia">Australia</option>
+                     <option value="Austria">Austria</option>
+                     <option value="Azerbaijan">Azerbaijan</option>
+                     <option value="Bahamas">Bahamas</option>
+                     <option value="Bahrain">Bahrain</option>
+                     <option value="Bangladesh">Bangladesh</option>
+                     <option value="Barbados">Barbados</option>
+                     <option value="Belarus">Belarus</option>
+                     <option value="Belgium">Belgium</option>
+                     <option value="Belize">Belize</option>
+                     <option value="Benin">Benin</option>
+                     <option value="Bhutan">Bhutan</option>
+                     <option value="Bolivia">Bolivia</option>
+                     <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                     <option value="Botswana">Botswana</option>
+                     <option value="Brazil">Brazil</option>
+                     <option value="Brunei">Brunei</option>
+                     <option value="Bulgaria">Bulgaria</option>
+                     <option value="Burkina Faso">Burkina Faso</option>
+                     <option value="Burundi">Burundi</option>
+                     <option value="Cambodia">Cambodia</option>
+                     <option value="Cameroon">Cameroon</option>
+                     <option value="Canada">Canada</option>
+                     <option value="Cape Verde">Cape Verde</option>
+                     <option value="Central African Republic">Central African Republic</option>
+                     <option value="Chad">Chad</option>
+                     <option value="Chile">Chile</option>
+                     <option value="China">China</option>
+                     <option value="Colombia">Colombia</option>
+                     <option value="Comoros">Comoros</option>
+                     <option value="Congo">Congo</option>
+                     <option value="Cook Islands and Niue">Cook Islands and Niue</option>
+                     <option value="Costa Rica">Costa Rica</option>
+                     <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                     <option value="Croatia">Croatia</option>
+                     <option value="Cuba">Cuba</option>
+                     <option value="Cyprus">Cyprus</option>
+                     <option value="Czech Republic">Czech Republic</option>
+                     <option value="Denmark">Denmark</option>
+                     <option value="Djibouti">Djibouti</option>
+                     <option value="Dominica">Dominica</option>
+                     <option value="Dominican Republic">Dominican Republic</option>
+                     <option value="East Timor">East Timor</option>
+                     <option value="Ecuador">Ecuador</option>
+                     <option value="Egypt">Egypt</option>
+                     <option value="El Salvador">El Salvador</option>
+                     <option value="Equatorial Guinea">Equatorial Guinea</option>
+                     <option value="Eritrea">Eritrea</option>
+                     <option value="Estonia">Estonia</option>
+                     <option value="Ethiopia">Ethiopia</option>
+                     <option value="Fiji">Fiji</option>
+                     <option value="Finland">Finland</option>
+                     <option value="France">France</option>
+                     <option value="Gabon">Gabon</option>
+                     <option value="Gambia">Gambia</option>
+                     <option value="Georgia">Georgia</option>
+                     <option value="Germany">Germany</option>
+                     <option value="Ghana">Ghana</option>
+                     <option value="Greece">Greece</option>
+                     <option value="Grenada">Grenada</option>
+                     <option value="Guatemala">Guatemala</option>
+                     <option value="Guinea">Guinea</option>
+                     <option value="Guinea-Bissau">Guinea-Bissau</option>
+                     <option value="Guyana">Guyana</option>
+                     <option value="Haiti">Haiti</option>
+                     <option value="Honduras">Honduras</option>
+                     <option value="Hong Kong">Hong Kong</option>
+                     <option value="Hungary">Hungary</option>
+                     <option value="Iceland">Iceland</option>
+                     <option value="India">India</option>
+                     <option value="Indonesia">Indonesia</option>
+                     <option value="Iran">Iran</option>
+                     <option value="Iraq">Iraq</option>
+                     <option value="Ireland">Ireland</option>
+                     <option value="Israel">Israel</option>
+                     <option value="Italy">Italy</option>
+                     <option value="Jamaica">Jamaica</option>
+                     <option value="Japan">Japan</option>
+                     <option value="Jordan">Jordan</option>
+                     <option value="Kazakhstan">Kazakhstan</option>
+                     <option value="Kenya">Kenya</option>
+                     <option value="Kiribati">Kiribati</option>
+                     <option value="North Korea">North Korea</option>
+                     <option value="South Korea">South Korea</option>
+                     <option value="Kuwait">Kuwait</option>
+                     <option value="Kyrgyzstan">Kyrgyzstan</option>
+                     <option value="Laos">Laos</option>
+                     <option value="Latvia">Latvia</option>
+                     <option value="Lebanon">Lebanon</option>
+                     <option value="Lesotho">Lesotho</option>
+                     <option value="Liberia">Liberia</option>
+                     <option value="Libya">Libya</option>
+                     <option value="Liechtenstein">Liechtenstein</option>
+                     <option value="Lithuania">Lithuania</option>
+                     <option value="Luxembourg">Luxembourg</option>
+                     <option value="Macedonia">Macedonia</option>
+                     <option value="Madagascar">Madagascar</option>
+                     <option value="Malawi">Malawi</option>
+                     <option value="Malaysia">Malaysia</option>
+                     <option value="Maldives">Maldives</option>
+                     <option value="Mali">Mali</option>
+                     <option value="Malta">Malta</option>
+                     <option value="Marshall Islands">Marshall Islands</option>
+                     <option value="Mauritania">Mauritania</option>
+                     <option value="Mauritius">Mauritius</option>
+                     <option value="Mexico">Mexico</option>
+                     <option value="Micronesia">Micronesia</option>
+                     <option value="Moldova">Moldova</option>
+                     <option value="Monaco">Monaco</option>
+                     <option value="Mongolia">Mongolia</option>
+                     <option value="Montenegro">Montenegro</option>
+                     <option value="Morocco">Morocco</option>
+                     <option value="Mozambique">Mozambique</option>
+                     <option value="Myanmar">Myanmar</option>
+                     <option value="Namibia">Namibia</option>
+                     <option value="Nauru">Nauru</option>
+                     <option value="Nepal">Nepal</option>
+                     <option value="Netherlands">Netherlands</option>
+                     <option value="New Zealand">New Zealand</option>
+                     <option value="Nicaragua">Nicaragua</option>
+                     <option value="Niger">Niger</option>
+                     <option value="Nigeria">Nigeria</option>
+                     <option value="Norway">Norway</option>
+                     <option value="Oman">Oman</option>
+                     <option value="Pakistan">Pakistan</option>
+                     <option value="Palau">Palau</option>
+                     <option value="Panama">Panama</option>
+                     <option value="Papua New Guinea">Papua New Guinea</option>
+                     <option value="Paraguay">Paraguay</option>
+                     <option value="Peru">Peru</option>
+                     <option value="Philippines">Philippines</option>
+                     <option value="Poland">Poland</option>
+                     <option value="Portugal">Portugal</option>
+                     <option value="Puerto Rico">Puerto Rico</option>
+                     <option value="Qatar">Qatar</option>
+                     <option value="Romania">Romania</option>
+                     <option value="Russia">Russia</option>
+                     <option value="Rwanda">Rwanda</option>
+                     <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                     <option value="Saint Lucia">Saint Lucia</option>
+                     <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                     <option value="Samoa">Samoa</option>
+                     <option value="San Marino">San Marino</option>
+                     <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                     <option value="Saudi Arabia">Saudi Arabia</option>
+                     <option value="Senegal">Senegal</option>
+                     <option value="Serbia and Montenegro">Serbia and Montenegro</option>
+                     <option value="Seychelles">Seychelles</option>
+                     <option value="Sierra Leone">Sierra Leone</option>
+                     <option value="Singapore">Singapore</option>
+                     <option value="Slovakia">Slovakia</option>
+                     <option value="Slovenia">Slovenia</option>
+                     <option value="Solomon Islands">Solomon Islands</option>
+                     <option value="Somalia">Somalia</option>
+                     <option value="South Africa">South Africa</option>
+                     <option value="Spain">Spain</option>
+                     <option value="Sri Lanka">Sri Lanka</option>
+                     <option value="Sudan">Sudan</option>
+                     <option value="Suriname">Suriname</option>
+                     <option value="Swaziland">Swaziland</option>
+                     <option value="Sweden">Sweden</option>
+                     <option value="Switzerland">Switzerland</option>
+                     <option value="Syria">Syria</option>
+                     <option value="Taiwan">Taiwan</option>
+                     <option value="Tajikistan">Tajikistan</option>
+                     <option value="Tanzania">Tanzania</option>
+                     <option value="Thailand">Thailand</option>
+                     <option value="Togo">Togo</option>
+                     <option value="Tonga">Tonga</option>
+                     <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                     <option value="Tunisia">Tunisia</option>
+                     <option value="Turkey">Turkey</option>
+                     <option value="Turkmenistan">Turkmenistan</option>
+                     <option value="Tuvalu">Tuvalu</option>
+                     <option value="Uganda">Uganda</option>
+                     <option value="Ukraine">Ukraine</option>
+                     <option value="United Arab Emirates">United Arab Emirates</option>
+                     <option value="United Kingdom">United Kingdom</option>
+                     <option value="United States">United States</option>
+                     <option value="Uruguay">Uruguay</option>
+                     <option value="Uzbekistan">Uzbekistan</option>
+                     <option value="Vanuatu">Vanuatu</option>
+                     <option value="Vatican City">Vatican City</option>
+                     <option value="Venezuela">Venezuela</option>
+                     <option value="Vietnam">Vietnam</option>
+                     <option value="Yemen">Yemen</option>
+                     <option value="Zambia">Zambia</option>
+                     <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+                  <label for="PoB_Country">Country</label>
+               </div>
+            </li>
+            </br>
+            <li id="Citizenship">
+               <label class="description" for="Citizenship"><span style="color: red; font-size: 14px" >*</span>Citizenship: </label>
+               <span>
+               <input id="US" name="citizen[]" class="element radio" type="radio" value="US" />
+               <label class="choice" for="US">US</label>
+               <input id="NonResident" name="citizen[]" class="element radio" type="radio" value="NonResident" />
+               <label class="choice" for="NonResident">Non-Resident</label>
+               <input id="ResidentAlien" name="citizen[]" class="element radio" type="radio" value="ResidentAlien" />
+               <label class="choice" for="ResidentAlien">Resident Alien</label>
+               </span>
+            </li>
+            <li id="CountryOfCitizenship">
+               <label class="description" for="CountryOfCitizenship">Country Of Citizenship (If not citizen)
+               </label>
+               <div>
+                  <input id="CountryOfCitizenship" name="countryOfCitizenship" class="element text medium" maxlength="255" value=""  onkeypress="return isLetterKey(event)"/>
+               </div>
+            </li>
+            <li id="OtherCitizenship">
+               <label class="description" for="OtherCitizenship">If citizenship other than US, indicate VISA Status </label>
+               <div>
+                  <input id="OtherCitizenship" name="otherCitizenship" class="element text medium"  maxlength="255" value=""  onkeypress="return isLetterKey(event)"/>
+               </div>
+            </li>
+            <li id="VisaFile">
+               <label class="description" for="VisaFile">Upload a photocopy of your VISA (Image files, .doc, .docx, .pdf accepted only)</label>
+               <div>
+                  <input id="visaFile" name="visaFile" class="element file" type="file"/>
+               </div>
+               <p class="guidelines" id="VisaGuide"><small>If citizenship other than US, indicate VISA status.</small>
+               </p>
+            </li>
+            </br>
+            <li id="Sex">
+               <label class="description" for="Sex"><span style="color: red; font-size: 14px" >*</span>Sex: </label>
+               <span>
+               <input id="SexMale" name="sex[]" class="element radio" type="radio" value="Male" />
+               <label class="choice" for="SexMale">Male</label>
+               <input id="SexFemale" name="sex[]" class="element radio" type="radio" value="Female" />
+               <label class="choice" for="SexFemale">Female</label>
+               </span>
+            </li>
+            </br>
+            <li id="EthnicGroup">
+               <label class="description" for="Ethnicity"><span style="color: red; font-size: 14px" >*</span>Ethnic Group (For reporting purposes only): </label>
+               <span>
+                  <table class="formTable">
+                     <tr>
+                        <td><input id="AmericanIndian" name="ethnic[]" class="element radio" type="radio" value="Native American" />
+                           <label class="choice" for="AmericanIndian">Native American</label>
+                        </td>
+                        <td><input id="Asian" name="ethnic[]" class="element radio" type="radio" value="Asian" />
+                           <label class="choice" for="Asian">Asian or Pacific Islander</label>
+                        </td>
+                        <td><input id="BlackNH" name="ethnic[]" class="element radio" type="radio" value="African-American" />
+                           <label class="choice" for="BlackNH">African-American</label>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td><input id="Hispanic" name="ethnic[]" class="element radio" type="radio" value="Hispanic" />
+                           <label class="choice" for="Hispanic">Hispanic</label>
+                        </td>
+                        <td><input id="White" name="ethnic[]" class="element radio" type="radio" value="Caucasian" />
+                           <label class="choice" for="White">Caucasian</label>
+                        </td>
+                        <td><input id="OtherRace" name="ethnic[]" class="element radio" type="radio" value="Other" />
+                           <label class="choice" for="OtherRace">Other</label>
+                        </td>
+                     </tr>
+                  </table>
+               </span>
+            </li>
+            </br>
+            <li id="Education">
+               <label class="description" for="Education"><span style="color: red; font-size: 14px" >*</span>Education: </label>
+               <table class="formTable">
+                  <tr>
+                     <td>Have you ever applied for admission to NC A&T?</td>
+                     <td>
+                        <input type="radio" name="applied[]" value="No" /> No
+                     </td>
+                     <td>
+                        <input type="radio" name="applied[]" value="Yes" /> Yes
+                     </td>
+                     <td>When
+                        <input id="WhenAdmission" name="whenAdmission" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Have you ever been admitted to NC A&T?</td>
+                     <td>
+                        <input type="radio" name="admitted[]" value="No" /> No
+                     </td>
+                     <td>
+                        <input type="radio" name="admitted[]" value="Yes" /> Yes
+                     </td>
+                     <td>When
+                        <input id="WhenAdmitted" name="whenAdmitted" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Have you ever been enrolled in classes at NC A&T?</td>
+                     <td>
+                        <input type="radio" name="enrolled[]" value="No" /> No
+                     </td>
+                     <td>
+                        <input type="radio" name="enrolled[]" value="Yes" /> Yes
+                     </td>
+                     <td>When
+                        <input id="WhenEnrolled" name="whenEnrolled" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Are you currently enrolled in an academic institution?</td>
+                     <td>
+                        <input type="radio" name="currentIns[]" value="No" /> No
+                     </td>
+                     <td>
+                        <input type="radio" name="currentIns[]" value="Yes" /> Yes
+                     </td>
+                     <td>Where
+                        <input id="WhenEnrolledOther" name="whenEnrolledOther" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+               </table>
+            </li>
+            </br>
+            </br>
+            <li id="EducationCompleted">
+               <label class="description" for="EducationCompleted"><span style="color: red; font-size: 14px" >*</span>Education Completed: </label>
+               <span>
+                  <table class="formTable">
+                     <tr>
+                        <td><input id="HighSchool" name="education[]" class="element checkbox" type="checkbox" value="High School"/>
+                           <label class="choice" for="HighSchool">High School</label>
+                        </td>
+                        <td><input id="Associates" name="education[]" class="element checkbox" type="checkbox" value="Associates" />
+                           <label class="choice" for="Associates">Associate's</label>
+                        </td>
+                        <td><input id="Bachelors" name="education[]" class="element checkbox" type="checkbox" value="Bachelors" onclick="alertUser()"/>
+                           <label class="choice" for="Bachelors">*Bachelor's</label>
+                        </td>
+                        <td><input id="masters" name="masters" class="element checkbox" type="checkbox" value="Masters" onclick="alertUser()"/>
+                           <label class="choice" for="Masters">*Master's</label>
+                        </td>
+                        <td><input id="Doctoral" name="education[]" class="element checkbox" type="checkbox" value="Doctoral" onclick="alertUser()"/>
+                           <label class="choice" for="Doctoral">*Doctoral</label>
+                        </td>
+                     </tr>
+                  </table>
+               </span>
+               <table class="formTable">
+                  <tr>
+                     <th></th>
+                     <th>Name of School</th>
+                     <th>City/State</th>
+                     <th>Dates Attended</th>
+                  </tr>
+                  <tr>
+                     <td>High School</td>
+                     <td>
+                        <input id="hsName" name="hsName" class="element text" maxlength="60" size="25" value=""  onkeypress="return isLetterKey(event)"/>
+                     </td>
+                     <td>
+                        <input id="hsCityState" name="hsCityState" class="element text" maxlength="60" size="25" value=""  onkeypress="return isLetterKey(event)"/>
+                     </td>
+                     <td>
+                        <input id="hsDate" name="hsDate" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>College/Undergraduate</td>
+                     <td>
+                        <input id="ugCollegeName" name="ugCollegeName" class="element text" maxlength="60" size="25" value=""  onkeypress="return isLetterKey(event)"/>
+                     </td>
+                     <td>
+                        <input id="ugCollegeCityState" name="ugCollegeCityState" class="element text" maxlength="60" size="25" value=""  onkeypress="return isLetterKey(event)"/>
+                     </td>
+                     <td>
+                        <input id="ugCollegeDate" name="ugCollegeDate" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>College/Graduate</td>
+                     <td>
+                        <input id="gradCollegeName" name="gradCollegeName" class="element text" maxlength="60" size="25" value=""  onkeypress="return isLetterKey(event)"/>
+                     </td>
+                     <td>
+                        <input id="gradCollegeCityState" name="gradCollegeCityState" class="element text" maxlength="60" size="25" value=""  onkeypress="return isLetterKey(event)"/>
+                     </td>
+                     <td>
+                        <input id="gradCollegeDate" name="gradCollegeDate" class="element text" maxlength="60" size="25" value="" />
+                     </td>
+                  </tr>
+               </table>
+            </li>
+            </br>
+            <div style="padding: 15px 15px 15px"><font style ="font-weight: bold"><font style ="color:red"size= "2px" id ="error"></font></font></div>
+            <li id="ResidenceInformation">
+               <label class="description" for="ResidenceInformation"><span style="color: red; font-size: 14px" >*</span>Residence Information: </label>
+               <table class="formTable">
+                  <tr>
+                     <td>Do you claim to be a legal resident of North Carolina for (at least) the past 12 months for tutition purposes?</td>
+                     <td>
+                        <input type="radio" name="residence" value="No" /> No
+                     </td>
+                     <td>
+                        <input type="radio" name="residence" value="Yes" /> Yes
+                     </td>
+                  </tr>
+               </table>
+		   </br>
+            </li>
+            </br>
+            <li id="MoreResidentInformation">
+               <span>I certify that I am a  bona fide resident of </span>
+               <span>
+               <input id="RI_County" name= "riCounty" class="element text" maxlength="50" size="10" value=""/  onkeypress="return isLetterKey(event)">
+               <label>County</label>
+               </span>
+               <span> in</span>
+               <span>
+               <input id="RI_State" name= "riState" class="element text" maxlength="50" size="10" value=""  onkeypress="return isLetterKey(event)"/>
+               <label>State</label>
+               </span>
+               <span> and have been a </span>
+               <span>
+               <input id="RI_State2" name= "riState2" class="element text" maxlength="50" size="10" value=""  onkeypress="return isLetterKey(event)"/>
+               <label>State</label>
+               </span>
+               <span>resident from</span>
+               <span>
+               <input id="StartResidentMonth" name="startResidentMonth" class="element text" size="2" maxlength="2" value=""  onkeypress="return isNumberKey(event)" > /
+               <label for="StartResidentMonth">MM</label>
+               </span>
+               <span>
+               <input id="StartResidentYear" name="startResidentYear" class="element text" size="4" maxlength="4" value=""  onkeypress="return isNumberKey(event)"type="text" >
+               <label for="StartResidentYear">YYYY</label>
+               </span>
+               <span>until</span>
+               <span>
+               <input id="FinishResidentMonth" name="finishResidentMonth" class="element text" size="2" maxlength="2" value=""  onkeypress="return isNumberKey(event)" > /
+               <label for="FinishResidentMonth">MM</label>
+               </span>
+               <span>
+               <input id="FinishResidentYear" name="finishResidentYear" class="element text" size="4" maxlength="4" value=""  onkeypress="return isNumberKey(event)" >
+               <label for="FinishResidentYear">YYYY</label>
+               </span>
+            </li>
+            </br>
+            <li id="FathersOccupation">
+               <span>
+               <input id="FathersOccupation" name= "fathersOccupation" class="element text" maxlength="50" size="25" value="" />
+               <label>Father's Occupation</label>
+               </span>
+               <span>
+               <input id="fatherEmployer" name= "fatherEmployer" class="element text" maxlength="50" size="25" value=""/>
+               <label>Employer</label>
+               </span>
+            </li>
+            <li id="MothersOccupation">
+               <span>
+               <input id="MothersOccupation" name= "mothersOccupation" class="element text" maxlength="50" size="25" value=""/>
+               <label>Mother's Occupation</label>
+               </span>
+               <span>
+               <input id="motherEmployer" name= "motherEmployer" class="element text" maxlength="50" size="25" value=""/>
+               <label>Employer</label>
+               </span>
+            </li>
+            </br>
+            </li>
+            <!--Added to format page text/get off sides-->
+            <div style="padding: 15px 15px 15px">
+               <b><span style="color: red; font-size: 14px" >* </span><u>Campus Safety Questions: </u></b>
+               </br>
+               </br>
+               Your "yes" answer to one or more of the following questions will not necessarily preclude your being admitted. However, your failure to provide complete, accurate and truthful information will be grounds to deny or withdraw your admission, or dismiss you after enrollment. For the purpose of the following six questions, "crime" or "crimal charge" refers to any crime other than a traffic-related misdemeanor or an infraction. You must, however, include alcohol or drug offenses whether or not they are traffic related.
+               </br>
+               </br>
+               </br>
+               1) Have you ever been convicted of a crime?
+               <input type="radio" name="crime1" value="Yes" /> Yes
+               <input type="radio" name="crime1" value="No" /> No
+               </br>
+               </br>
+               2) Have you ever entered a plea of guilty, a plea of no contest, a plea of nolo contendere, or an Alford plea, or have you recieved a deffered prosecution or prayer for judgement continued, to a criminal charge?
+               <input type="radio" name="crime2" value="Yes" /> Yes
+               <input type="radio" name="crime2" value="No" /> No
+               </br>
+               </br>
+               3) Have you otherwise accepted responsibility for a commission of a crime?
+               <input type="radio" name="crime3" value="Yes" /> Yes
+               <input type="radio" name="crime3" value="No" /> No
+               </br>
+               </br>
+               4) Do you have any criminal charges pending against you?
+               <input type="radio" name="crime4" value="Yes" /> Yes
+               <input type="radio" name="crime4" value="No" /> No
+               </br>
+               </br>
+               5) Have you ever been expelled, dismissed, or suspended, placed on probation, or otherwise subject to any disciplinary sanction by any school, college, or university?
+               <input type="radio" name="suspend" value="Yes" /> Yes
+               <input type="radio" name="suspend" value="No" /> No
+               </br>
+               </br>
+               6) If you have ever served in the military, did you recieve any type of discharge other than an honorable discharge?
+               <input type="radio" name="military" value="Yes" /> Yes
+               <input type="radio" name="military" value="No" /> No
+               </br>
+               </br>
+               <input type="radio" name="military" value="Currently Serving" /> Currenty Serving
+               <input type="radio" name="military" value="Never Served" /> Never Served
+               </br>
+               *If you served or currently serving in the military, please complete the <a href="http://www.ncat.edu/academics/outreach/summer-session/forms/Military%20Status%20Form.pdf" target="_blank">Military Status Form</a>.
+               </br>
+               </br>
+               </br>
+               <center>
+                  <li id="Continued">
+                     <label class="description" for="continued">If you answered "yes" to any of the six questions above, please explain the circumstances below.</label>
+                     <div>
+                        <textarea id="explain" name="explain" class="element textarea medium"></textarea>
+                     </div>
+                  </li>
+               </center>
+               </br>
+               You must promptly notify the Admissions Office in writing of any criminal charge, any disposition of a crimal charge, or any school, college, or university disciplinary action against you, or any type of military discharge other than an honorable discharge that occurs at any time after you submid this application. Your failure to do so will be grounds to deny or withdarw your admission, or to dismiss you after enrollment.
+               </br>
+               </br>
+               By signing this application, I agree to abide by the policies and regulations of North Carolina A&T State University and to the best of my knowledge, the information I have given is true. I understand that any misrepresentation of facts on this application will cause for refusal of admission, cancelation of admission, or suspension from the University.
+            </div>
+            <li id="Signature">
+               <span>
+               <input id="sign2" name= "sign2" class="element text" maxlength="50" size="40" value=""  onkeypress="return isLetterKey(event)"/>
+               <label> Applicant Signature (Parent/Guardian signature if under 18)</label>
+               </span>
+               <span>
+               <input id="lastFourSSN2" name= "lastFourSSN2" class="element text" maxlength="4" size="10" value=""  onkeypress="return isNumberKey(event)"/>
+               <label>Last Four of SSN</label>
+               </span>
+            </li>
+            </br>
+            </br>
+            <li id="FindOutQuestionaire">
+               <label class="description" for="FindOutQuestionaire"><span style="color: red; font-size: 14px" >*</span>To help better serve you, we need to know how did you hear about us. Please check all that apply:
+               </label>
+               <!--changed from educationTable-->
+               <table class="formTable">
+                  <tr>
+                     <td><input id="Web" name="reference[]" class="element checkbox" type="checkbox" value="Web" />
+                        <label class="choice" for="Web">Website (NCAT)</label>
+                     </td>
+                     <td><input id="Flyer" name="reference[]" class="element checkbox" type="checkbox" value="Flyer" />
+                        <label class="choice" for="Flyer">Brochure/Flyer</label>
+                     </td>
+                     <td><input id="Newspaper" name="reference[]" class="element checkbox" type="checkbox" value="Newspaper" />
+                        <label class="choice" for="Newspaper">Newspaper</label>
+                     </td>
+                     <td><input id="Friend" name="reference[]" class="element checkbox" type="checkbox" value="Friend" />
+                        <label class="choice" for="Friend">Friend/Family</label>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td><input id="Radio" name="reference[]" class="element checkbox" type="checkbox" value="Radio" />
+                        <label class="choice" for="Radio">Radio/Television</label>
+                     </td>
+                     <td><input id="Email" name="reference[]" class="element checkbox" type="checkbox" value="Email" />
+                        <label class="choice" for="Email">Email/Letter</label>
+                     </td>
+                     <td><input id="Social" name="reference[]" class="element checkbox" type="checkbox" value="Social" />
+                        <label class="choice" for="Social">Social Media</label>
+                     <td>Other <input id="Other" name= "reference[]" class="element text" maxlength="50" size="20" value=""/>
+                     </td>
+                  </tr>
+               </table>
+            </li>
+            <div style="padding: 15px 15px 15px">
+               NC A&T does not discriminate against employees, students, or applicants on the basis of age, color, disability, gender, gender identity,gender expression, national origin, political affiliation, race, religion, sexual orientation, information, veteran status, or any other basis protected by law.																			
+            </div>
+            </br>
+            </br>
+            </br>
+            <center>
+               <div style="color:red"><b>Please verify that you are human.</b><br></div>
+               <div class="g-recaptcha" data-sitekey="6LeF-QkTAAAAAKvnk0xmh5r0k9tqORaG0ZuSSgMG"></div>
+               <script>
+                  //function to alert user if they select education completed as bachelors, master, or doctoral
+                  function alertUser(){
+                      document.getElementById("error").innerHTML = "If you possess a Bachelor's, Master's and/or a Doctoral degree, please submit your application to: The School of Graduate Studies, 120 Gibbs Hall, Greensboro, NC 27411.";
+                  }
+                      
+                   
+                  //pre populate the month, day, and year with current date
+                  var date = new Date();
+                      var month = document.getElementById("todaysDate_1");
+                  	month.value = date.getMonth()+1;
+                  	if(month.value<10){
+                  		month.value = "0"+(date.getMonth()+1)
+                  	}
+                      
+                      var day = document.getElementById("todaysDate_2");
+                      day.value = date.getDate();
+                  	if(day.value<10){
+                  		day.value = "0"+(date.getDate())
+                  	}
+                  	
+                      var year = document.getElementById("todaysDate_3");
+                      year.value = date.getFullYear();
+                    
+               </script>
+               </br>
+               <!--Show alert box to confirm the applicant wants to submit-->
+               <input class="btn" id="submit" type="submit" name="submit" value="Submit" onclick="return confirm('Please review information entered before submitting. Click 'OK' to submit or 'CANCEL' to edit information.')" />
+               <br>&nbsp;	
+               <br>
+            </center>
+         </form>
+      </div>
+   </body>
+</html>
